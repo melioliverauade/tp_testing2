@@ -1,0 +1,31 @@
+name: CI Pipeline TPO2
+
+on: [push]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v3
+
+    - name: Configurar Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Instalar dependencias
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest pytest-html
+
+    - name: Ejecutar tests con reporte
+      run: |
+        pytest --html=reporte.html --self-contained-html
+
+    - name: Subir artefacto de reporte
+      uses: actions/upload-artifact@v4
+      with:
+        name: reporte-de-pruebas
+        path: reporte.html
