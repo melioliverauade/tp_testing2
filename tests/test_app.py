@@ -19,3 +19,9 @@ def test_stock_producto_inexistente():
     inv = Inventario()
     # Debe devolver 0 en lugar de fallar
     assert inv.obtener_stock("Bananas") == 0
+
+def test_vaciar_inventario():
+    inv = Inventario()
+    inv.agregar_producto("Naranjas", 5)
+    inv.vaciar_inventario()
+    assert inv.obtener_stock("Naranjas") == 0

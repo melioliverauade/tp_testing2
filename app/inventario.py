@@ -14,3 +14,7 @@ class Inventario:
 
     def obtener_stock(self, nombre):
         return self.productos.get(nombre, 0)
+    
+    def vaciar_inventario(self):
+        self.productos = {}
+        return True
